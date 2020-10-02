@@ -1,0 +1,50 @@
+html{
+    background-color: orange;
+}
+
+body{
+    background-color: white;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    margin: 50px;
+}
+
+.burgerList{
+    font-size: 20px;
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+    background-color: green;
+}
+
+.burgerEaten {
+    font-size: 20px;
+    text-align: right;
+    background-color: greenyellow;
+    padding: 10px;
+    margin: 10px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 40px;
+    margin: 50px;
+}
+
+.formContainer{
+    background-color: orange;
+}
+
+.addButton {
+    text-align: center;
+    border-radius: 25px;
+    padding: 10px;
+    background-color: orange;
+    border: none;
+}
