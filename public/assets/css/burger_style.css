@@ -1,50 +1,93 @@
-html{
-    background-color: orange;
+html {
+    background-color: #d1ba8f;
+    align-items: center;
+    align-content: center;
 }
 
-body{
-    background-color: white;
-    margin: 0 auto;
+body {
+    width: 75%;
+    margin: 0 auto; 
     display: flex;
+    min-height: 100vh;
     flex-direction: column;
+    background-color: white;
 }
 
-h1{
+#burger {
+    align-self: center;
+    margin: auto;
+}
+
+h1 {
     text-align: center;
-    font-size: 50px;
+    font-size: 65px;
     margin: 50px;
 }
 
-.burgerList{
+.burgerAvailable {
+    font-weight: normal;
     font-size: 20px;
-    text-align: left;
-    padding: 10px;
+    text-align: center;
+    border-radius: 25px;
+    width: 90%;
     margin: 10px;
-    background-color: green;
+    padding: 10px;
+    background-color: #b7ffc2;
+    border: none;
+}
+
+.burgerAvailable:hover {
+    background-color: #81ff94;
 }
 
 .burgerEaten {
+    font-weight: normal;
     font-size: 20px;
-    text-align: right;
-    background-color: greenyellow;
-    padding: 10px;
+    text-align: center;
+    border-radius: 25px;
     margin: 10px;
+    padding: 10px;
+    background-color: #ffd1c9;
 }
 
 h2 {
-    text-align: center;
+     text-align: center;
     font-size: 40px;
     margin: 50px;
 }
 
-.formContainer{
-    background-color: orange;
+h3 {
+    text-align: center;
+    font-size: 30px;
 }
 
-.addButton {
+.formContainer {
+    background-color: orange;
+    width: 60%;
+    align-content: center;
+    align-self: center;
+}
+#name {
+    align-content: center;
+    font-size: 20px;
+    border-radius: 25px;
+    width:60%;
+}
+
+.addBurger{
+    font-weight: normal;
+    align-self: center;
+    align-content: center;
+    font-size: 20px;
     text-align: center;
     border-radius: 25px;
+    width: 60%;
+    margin: 0;
     padding: 10px;
-    background-color: orange;
+    background-color: gray;
     border: none;
 }
+
+
+
+

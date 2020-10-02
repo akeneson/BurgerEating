@@ -1,84 +1,94 @@
-// Import MySQL connection.
-var connection = require("../config/connection");
+// Import the MySQL connection object
+var connection = require ('./connection.js');
 
-// Helper function for SQL syntax.
-// Let's say we want to pass 3 values into the mySQL query.
-// In order to write the query, we need 3 question marks.
-// The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
-// ["?", "?", "?"].toString() => "?,?,?";
+// Helper function for generating MySQL syntax
 function printQuestionMarks(num) {
-  var arr = [];
+	var arr = [];
 
-  for (var i = 0; i < num; i++) {
-    arr.push("?");
-  }
+	for (var i = 0; i < num; i++) {
+		arr.push("?");
+	}
 
-  return arr.toString();
+	return arr.toString();
 }
 
-// Helper function to convert object key/value pairs to SQL syntax
+// Helper function for generating My SQL syntax
 function objToSql(ob) {
-  var arr = [];
+	var arr = [];
 
-  // loop through the keys and push the key/value as a string int arr
-  for (var key in ob) {
-    arr.push(key + "=" + ob[key]);
-  }
+	for (var key in ob) {
+		arr.push(key + "=" + ob[key]);
+	}
 
-  // translate array of strings to a single comma-separated string
-  return arr.toString();
+	return arr.toString();
 }
 
-// Object for all our SQL statement functions.
+// Create the ORM object to perform SQL queries
 var orm = {
-  Selectall: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  insertOne: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
+	// Function that returns all table entries
+	chooseAll: function(tableInput, cb) {
+		// Construct the query string that returns all rows from the target table
+		var queryString = "SELECT * FROM " + tableInput + ";";
 
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+		// Perform the database query
+		connection.query(queryString, function(err, result) {
+			if (err) {
+				throw err;
+			}
 
-    // console.log(queryString);
+			// Return results in callback
+			cb(result);
+		});
+	},
 
-    connection.query(queryString, vals, function(err, result) {
-      if (err) {
-        throw err;
-      }
+	// Function that insert a single table entry
+	chooseOne: function(table, cols, vals, cb) {
+		// Construct the query string that inserts a single row into the target table
+		var queryString = "INSERT INTO " + table;
 
-      cb(result);
-    });
-  },
-  // An example of objColVals would be {name: panther, sleepy: true}
-  updateOne: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
+		queryString += " (";
+		queryString += cols.toString();
+		queryString += ") ";
+		queryString += "VALUES (";
+		queryString += printQuestionMarks(vals.length);
+		queryString += ") ";
 
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
+		// console.log(queryString);
 
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
+		// Perform the database query
+		connection.query(queryString, vals, function(err, result) {
+			if (err) {
+				throw err;
+			}
 
-      cb(result);
-    });
-  }
+			// Return results in callback
+			cb(result);
+		});
+	},
+
+	// Function that updates a single table entry
+	updateOne: function(table, objColVals, condition, cb) {
+		// Construct the query string that updates a single entry in the target table
+		var queryString = "UPDATE " + table;
+
+		queryString += " SET ";
+		queryString += objToSql(objColVals);
+		queryString += " WHERE ";
+		queryString += condition;
+
+		// console.log(queryString);
+
+		// Perform the database query
+		connection.query(queryString, function(err, result) {
+			if (err) {
+				throw err;
+			}
+
+			// Return results in callback
+			cb(result);
+		});
+	}
 };
 
-// Export the orm object for the model (cat.js).
+// Export the orm object for use in other modules
 module.exports = orm;
