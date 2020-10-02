@@ -26,7 +26,7 @@ function objToSql(ob) {
 // Create the ORM object to perform SQL queries
 var orm = {
 	// Function that returns all table entries
-	chooseAll: function(tableInput, cb) {
+	selectAll: function(tableInput, cb) {
 		// Construct the query string that returns all rows from the target table
 		var queryString = "SELECT * FROM " + tableInput + ";";
 
@@ -42,7 +42,7 @@ var orm = {
 	},
 
 	// Function that insert a single table entry
-	chooseOne: function(table, cols, vals, cb) {
+	insertOne: function(table, cols, vals, cb) {
 		// Construct the query string that inserts a single row into the target table
 		var queryString = "INSERT INTO " + table;
 
